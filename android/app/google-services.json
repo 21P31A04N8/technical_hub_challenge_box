@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "773341800626",
+    "project_id": "technicalhubchallengebox",
+    "storage_bucket": "technicalhubchallengebox.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773341800626:android:592d50ca958ba2c00381ab",
+        "android_client_info": {
+          "package_name": "com.example.technical_hub_challenge_box"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnrpcIGxzI_EpyVLk6EO77mNN4SZzA6C0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
