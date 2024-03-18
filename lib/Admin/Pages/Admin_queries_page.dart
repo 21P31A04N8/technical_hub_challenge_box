@@ -65,36 +65,31 @@ class _TabBarPage1State extends State<Admin_query_page>
 
                         borderRadius: BorderRadius.circular(20)),
 
-                    child: Column(
-                      children: [
-                        TabBar(
-                            unselectedLabelColor:
-                                Color.fromRGBO(92, 156, 107, 1),
-                            labelColor: Color.fromRGBO(11, 72, 73, 1),
-                            indicatorColor: Colors.white54,
-                            controller: tabController,
-                            indicatorWeight: 3,
-                            dividerColor: Colors.white54,
-                            // dividerHeight: 0.001,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            //indicatorPadding: EdgeInsets.symmetric(horizontal: 2,vertical:2) ,
+                    child: TabBar(
+                        unselectedLabelColor: Color.fromRGBO(92, 156, 107, 1),
+                        labelColor: Color.fromRGBO(11, 72, 73, 1),
+                        indicatorColor: Colors.white54,
+                        controller: tabController,
+                        indicatorWeight: 3,
+                        dividerColor: Colors.white54,
+                        // dividerHeight: 0.001,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        //indicatorPadding: EdgeInsets.symmetric(horizontal: 2,vertical:2) ,
 
-                            indicator: BoxDecoration(
-                                color: Color.fromRGBO(109, 202, 131, 1),
-                                borderRadius: BorderRadius.circular(20)),
-                            tabs: [
-                              Tab(
-                                text: 'All',
-                              ),
-                              Tab(
-                                text: "Solved",
-                              ),
-                              Tab(
-                                text: "unsolved",
-                              )
-                            ]),
-                      ],
-                    ),
+                        indicator: BoxDecoration(
+                            color: Color.fromRGBO(109, 202, 131, 1),
+                            borderRadius: BorderRadius.circular(20)),
+                        tabs: [
+                          Tab(
+                            text: 'All',
+                          ),
+                          Tab(
+                            text: "Solved",
+                          ),
+                          Tab(
+                            text: "unsolved",
+                          )
+                        ]),
                   ),
                   SizedBox(
                     height: hi / 20,

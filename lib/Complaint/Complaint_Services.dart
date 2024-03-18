@@ -2,6 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:technical_hub_challenge_box/Auth/User_Data_Service.dart';
 import 'package:technical_hub_challenge_box/Models/Message.dart';
+import 'package:uuid/data.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/rng.dart';
+import 'package:uuid/v4.dart';
 
 class chatservicres {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -20,12 +24,16 @@ class chatservicres {
     final String currentuserID = _auth.currentUser!.uid;
     final String currentuseremail = _auth.currentUser!.email!;
     final Timestamp timestamp = Timestamp.now();
+    bool isAccepted = false;
+    const uuid = Uuid();
+    var id = uuid.v4();
 
     Message newmessage = Message(
         senderID: currentuserID,
         senderEmail: currentuseremail,
         message: message,
-        timestamp: timestamp);
+        timestamp: timestamp,
+        isAccepted: isAccepted);
 
     // List<String> ids = [currentuserID, currentuseremail];
     // ids.sort();
@@ -35,13 +43,17 @@ class chatservicres {
         .collection("Users")
         .doc(currentuserID)
         .collection("messages")
-        .add(newmessage.toMap());
+        .doc(id)
+        .set(newmessage.toMap());
+    // .doc(Id)
+    // .add(newmessage.toMap());
 
     await _firestore
         .collection("Admin")
         .doc("adminsDataBasedOnUser")
         .collection(queryType)
-        .add(newmessage.toMap());
+        .doc(id)
+        .set(newmessage.toMap());
     // addToAdmin(message);
   }
 
@@ -54,7 +66,7 @@ class chatservicres {
         .collection("Users")
         .doc(currentuserID)
         .collection("messages")
-        .orderBy("timestamp", descending: false)
+        .orderBy("timestamp", descending: true)
         .snapshots();
   }
 

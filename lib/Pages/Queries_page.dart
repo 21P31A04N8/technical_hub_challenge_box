@@ -18,6 +18,7 @@ class _queryboxState extends State<querybox> {
   final chatservicres _chatService = chatservicres();
   final AuthgServices _authServices = AuthgServices();
   String _selectedItem = 'Choose one';
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     var hi = MediaQuery.of(context).size.height;
@@ -89,8 +90,15 @@ class _queryboxState extends State<querybox> {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Container(
-        child: Complaint_display(
-      messege: data['message'],
-    ));
+      child: Row(
+        children: [
+          Container(
+              child: Complaint_display(
+            messege: data['message'],
+          )),
+          Text(data["isAccepted"] ? "Accepted" : "pending")
+        ],
+      ),
+    );
   }
 }

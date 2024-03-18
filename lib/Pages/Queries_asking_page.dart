@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:technical_hub_challenge_box/Complaint/Complaint_Services.dart';
+import 'package:lottie/lottie.dart';
 
 class comment extends StatefulWidget {
   const comment({super.key});
@@ -10,26 +11,37 @@ class comment extends StatefulWidget {
   State<comment> createState() => _commentState();
 }
 
-class _commentState extends State<comment> {
+class _commentState extends State<comment> with SingleTickerProviderStateMixin {
+  bool isload = false;
+  bool islottie = true;
+  bool isAccepted = false;
+  AnimationController? arr;
   TextEditingController _messageController = TextEditingController();
   final chatservicres _chatService = chatservicres();
   String _selectedItem = 'Choose one';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    arr = AnimationController(vsync: this, duration: Duration(seconds: 3));
+  }
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty && _selectedItem != "Choose one") {
       await _chatService.sendMessege(
           _messageController.text, _selectedItem.trim().toLowerCase());
       _messageController.clear();
+      _selectedItem = 'Choose one';
     } else {
       print(
           "=====================Error Choose any type=================================");
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     var hi = MediaQuery.of(context).size.height;
     var wi = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -129,12 +141,66 @@ class _commentState extends State<comment> {
                   SizedBox(
                     height: hi / 15,
                   ),
-                  ElevatedButton(
-                      onPressed: sendMessage,
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green)),
-                      child: Text('Sumbit'))
+                  GestureDetector(
+                    onTap: (_messageController.text.isNotEmpty &&
+                            _selectedItem != "Choose one")
+                        ? () {
+                            //isAccepted = false;
+                            isload = true;
+                            islottie = false;
+                            setState(() {
+                              sendMessage();
+                              arr!
+                                  .forward()
+                                  .then((value) => Navigator.pop(context));
+                            });
+
+                            // if (sendMessage()) {
+                            //   Navigator.pop(context);
+                            // }
+                          }
+                        : null,
+                    child: Container(
+                      width: 120, // Adjust width according to your needs
+                      height: 50, // Adjust height according to your needs
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            25), // Rounded corners for the button
+                        color: Colors.green, // Button color
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Visibility(
+                              visible: isload,
+                              child: Lottie.asset(
+                                controller: arr,
+                                'lib/Assets/Animation1.json',
+                                // Path to your Lottie animation file
+                                width: 50, // Adjust width of the animation
+                                height: 50, // Adjust height of the animation
+                                fit: BoxFit.cover,
+                                repeat: islottie ? true : false,
+                              ),
+                            ),
+                            //  Adjust spacing between the animation and text
+                            Visibility(
+                              visible: !isload,
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: Colors.white, // Text color
+                                  fontSize: 16, // Text size
+                                  fontWeight: FontWeight.bold, // Text weight
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
