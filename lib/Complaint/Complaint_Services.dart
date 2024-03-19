@@ -33,11 +33,14 @@ class chatservicres {
         senderEmail: currentuseremail,
         message: message,
         timestamp: timestamp,
-        isAccepted: isAccepted);
+        isAccepted: isAccepted,
+        department: queryType,
+        uuid1: id);
 
-    // List<String> ids = [currentuserID, currentuseremail];
-    // ids.sort();
-    // String chatRoomID = ids.join("_");
+    // var timeStamp1 = timestamp.toString();
+    // List<String> ids = [currentuserID, timeStamp1];
+    // // ids.sort();
+    // String uniquid = ids.join("");
 
     await _firestore
         .collection("Users")

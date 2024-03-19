@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:technical_hub_challenge_box/Admin/Pages/All_Admin_Query.dart';
+import 'package:technical_hub_challenge_box/Admin/Pages/Solved_queries_page.dart';
+import 'package:technical_hub_challenge_box/Admin/Pages/Unsolved_query_page.dart';
 import 'package:technical_hub_challenge_box/Auth/Auth_Services.dart';
 import 'package:technical_hub_challenge_box/Complaint/Complaint_Services.dart';
 import 'package:technical_hub_challenge_box/complaint_display.dart';
@@ -99,8 +101,8 @@ class _TabBarPage1State extends State<Admin_query_page>
                     controller: tabController,
                     children: [
                       AllAdminquerypage(),
-                      AllAdminquerypage(),
-                      AllAdminquerypage()
+                      Solvedqueries(),
+                      Unsolvedquries()
                     ],
                   )),
                   SizedBox(

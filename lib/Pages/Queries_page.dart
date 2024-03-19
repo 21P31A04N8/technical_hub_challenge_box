@@ -41,16 +41,12 @@ class _queryboxState extends State<querybox> {
             Container(
               height: hi / 15,
               width: wi / 1.1,
-              child: Card(
-                color: Colors.green[400],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                child: Center(
-                    child: Text(
-                  "Query",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
-                )),
-              ),
+              color: Colors.transparent,
+              child: Center(
+                  child: Text(
+                "Query",
+                style: TextStyle(fontSize: 24, color: Colors.white),
+              )),
             ),
             Expanded(child: _buildmessageList()),
           ]),
@@ -90,7 +86,16 @@ class _queryboxState extends State<querybox> {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+              begin: AlignmentDirectional.topCenter,
+              end: AlignmentDirectional.bottomCenter,
+              colors: [Colors.green, Colors.green])),
+      // padding: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
               child: Complaint_display(

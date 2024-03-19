@@ -34,6 +34,19 @@ class _AllAdminquerypageState extends State<AllAdminquerypage> {
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // void seen(int i, String id) {
+  //   // var id;
+  //   // List docid = [currentuserID, timeStamp];
+  //   // id = docid.join("");
+  //   _firestore
+  //       .collection("Admin")
+  //       .doc("adminsDataBasedOnUser")
+  //       .collection(userData["role"])
+  //       .doc(id)
+  //       .update({"isAccepted": true});
+  //   print(
+  //       "===================================Seen tapped================================");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -75,8 +88,64 @@ class _AllAdminquerypageState extends State<AllAdminquerypage> {
                 return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context, index) {
-                      return Complaint_display(
-                        messege: data[index]["message"],
+                      return Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            gradient: LinearGradient(
+                                begin: AlignmentDirectional.topCenter,
+                                end: AlignmentDirectional.bottomCenter,
+                                colors: [Colors.green, Colors.green])),
+                        //padding: EdgeInsets.all(16),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Complaint_display(
+                              messege: data[index]["message"],
+                            ),
+                            IconButton(
+                                onPressed: () {
+                                  // Map<dynamic, dynamic> currentUserID = {};
+                                  // // Future getData()  {
+                                  // _firestore
+                                  //     .collection("Admin")
+                                  //     .doc("adminsDataBasedOnUser")
+                                  //     .collection(userData["role"])
+                                  //     .doc(data[index]["uuid1"])
+                                  //     .get()
+                                  //     .then((snapshot) {
+                                  //   //print(snapshot.data());
+                                  //   currentUserID = snapshot.data()!;
+                                  // });
+                                  // }
+                                  // var currentUserID = _firestore
+                                  //     .collection("Admin")
+                                  //     .doc("adminsDataBasedOnUser")
+                                  //     .collection(userData["role"])
+                                  //     .doc(data[index]["uuid1"])
+                                  //     .snapshots();
+                                  _firestore
+                                      .collection("Admin")
+                                      .doc("adminsDataBasedOnUser")
+                                      .collection(userData["role"])
+                                      .doc(data[index]["uuid1"])
+                                      .update({"isAccepted": true});
+                                  print(
+                                      "===================================Seen tapped================================");
+                                  _firestore
+                                      .collection("Users")
+                                      .doc(data[index]["senderID"])
+                                      .collection("messages")
+                                      .doc(data[index]["uuid1"])
+                                      .update({"isAccepted": true});
+                                  print(
+                                      "===================================Seen tapped123345566================================");
+                                  print(data[index]["senderID"]);
+                                },
+                                icon: Icon(Icons.done_outlined))
+                          ],
+                        ),
                       );
                     });
                 // return ListView(
