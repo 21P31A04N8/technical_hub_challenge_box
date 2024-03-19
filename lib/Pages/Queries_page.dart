@@ -101,7 +101,7 @@ class _queryboxState extends State<querybox> {
               child: Complaint_display(
             messege: data['message'],
           )),
-          Text(data["isAccepted"] ? "Accepted" : "pending")
+          Text(data["isAccepted"] ? "Solved" : "Pending")
         ],
       ),
     );

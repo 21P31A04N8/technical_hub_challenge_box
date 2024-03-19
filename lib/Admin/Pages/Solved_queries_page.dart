@@ -61,7 +61,7 @@ class _SolvedqueriesState extends State<Solvedqueries> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color.fromRGBO(152, 148, 148, 1),
+                    Color.fromRGBO(36, 24, 24, 1),
                     Color.fromRGBO(11, 72, 73, 1)
                   ],
                 )),
@@ -128,7 +128,10 @@ class _SolvedqueriesState extends State<Solvedqueries> {
                 return Text('null');
               }
             })
-        : Center(child: CircularProgressIndicator());
+        : Center(
+            child: CircularProgressIndicator(
+            color: Colors.green,
+          ));
   }
 
   Widget _buildMessageItem(DocumentSnapshot doc) {
@@ -136,9 +139,18 @@ class _SolvedqueriesState extends State<Solvedqueries> {
 
     return (data["isAccepted"])
         ? Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.green),
+                borderRadius: BorderRadius.circular(20),
+                gradient: LinearGradient(
+                    begin: AlignmentDirectional.topCenter,
+                    end: AlignmentDirectional.bottomCenter,
+                    colors: [Colors.transparent, Colors.transparent])),
+            //padding: EdgeInsets.all(16),
+            margin: EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
             child: Complaint_display(
-            messege: data['message'],
-          ))
-        : Text("");
+              messege: data['message'],
+            ))
+        : SizedBox();
   }
 }

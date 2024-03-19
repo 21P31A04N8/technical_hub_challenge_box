@@ -90,11 +90,15 @@ class _AllAdminquerypageState extends State<AllAdminquerypage> {
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: BoxDecoration(
+                            border: Border.all(color: Colors.green),
                             borderRadius: BorderRadius.circular(20),
                             gradient: LinearGradient(
                                 begin: AlignmentDirectional.topCenter,
                                 end: AlignmentDirectional.bottomCenter,
-                                colors: [Colors.green, Colors.green])),
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.transparent
+                                ])),
                         //padding: EdgeInsets.all(16),
                         margin:
                             EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
@@ -143,7 +147,10 @@ class _AllAdminquerypageState extends State<AllAdminquerypage> {
                                       "===================================Seen tapped123345566================================");
                                   print(data[index]["senderID"]);
                                 },
-                                icon: Icon(Icons.done_outlined))
+                                icon: Icon(data[index]["isAccepted"]
+                                    ? Icons.done_all
+                                    : Icons.done_outlined),
+                                color: Colors.green)
                           ],
                         ),
                       );
@@ -157,7 +164,10 @@ class _AllAdminquerypageState extends State<AllAdminquerypage> {
                 return Text('null');
               }
             })
-        : Center(child: CircularProgressIndicator());
+        : Center(
+            child: CircularProgressIndicator(
+            color: Colors.green,
+          ));
   }
 
   // Widget _buildMessageItem(DocumentSnapshot doc) {
