@@ -25,6 +25,7 @@ class chatservicres {
     final String currentuseremail = _auth.currentUser!.email!;
     final Timestamp timestamp = Timestamp.now();
     bool isAccepted = false;
+    bool isSolved = false;
     const uuid = Uuid();
     var id = uuid.v4();
 
@@ -35,7 +36,8 @@ class chatservicres {
         timestamp: timestamp,
         isAccepted: isAccepted,
         department: queryType,
-        uuid1: id);
+        uuid1: id,
+        isSloved: isSolved);
 
     // var timeStamp1 = timestamp.toString();
     // List<String> ids = [currentuserID, timeStamp1];

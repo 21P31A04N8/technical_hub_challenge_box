@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:technical_hub_challenge_box/Admin/Pages/All_Admin_Query.dart';
 import 'package:technical_hub_challenge_box/Admin/Pages/Solved_queries_page.dart';
-import 'package:technical_hub_challenge_box/Admin/Pages/Unsolved_query_page.dart';
+import 'package:technical_hub_challenge_box/Admin/Pages/Unsolved_query.dart';
+import 'package:technical_hub_challenge_box/Admin/Pages/pendingQuery.dart';
 import 'package:technical_hub_challenge_box/Auth/Auth_Services.dart';
 import 'package:technical_hub_challenge_box/Complaint/Complaint_Services.dart';
 import 'package:technical_hub_challenge_box/complaint_display.dart';
@@ -55,9 +55,9 @@ class _TabBarPage1State extends State<Admin_query_page>
                     height: 100,
                   ),
                   Container(
-                    height: hi / 16.5,
+                    height: 35,
                     // color: Color.fromRGBO(6, 37, 37, 1),
-                    width: MediaQuery.of(context).size.height,
+                    width: wi / 1.25,
                     decoration: BoxDecoration(
                         color: Color.fromRGBO(6, 37, 37, 0.3),
                         border: Border.all(color: Colors.green),
@@ -79,30 +79,56 @@ class _TabBarPage1State extends State<Admin_query_page>
                         //indicatorPadding: EdgeInsets.symmetric(horizontal: 2,vertical:2) ,
 
                         indicator: BoxDecoration(
-                            color: Color.fromRGBO(109, 202, 131, 1),
+                            gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFF539463),
+                                  Color(0xFF639F71),
+                                  Color(0xFF377546),
+                                  Color(0xFF74A580)
+                                ]),
                             borderRadius: BorderRadius.circular(20)),
                         tabs: [
                           Tab(
-                            text: 'All',
+                            child: Text(
+                              'Pending',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                           Tab(
-                            text: "Solved",
+                            child: Text(
+                              'Solved',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                           Tab(
-                            text: "unsolved",
-                          )
+                            child: Text(
+                              'Unsolved',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ]),
                   ),
-                  SizedBox(
-                    height: hi / 20,
-                  ),
+                  // SizedBox(
+                  //   height: hi / 20,
+                  // ),
                   Expanded(
                       child: TabBarView(
                     controller: tabController,
                     children: [
-                      AllAdminquerypage(),
+                      pendingQuery(),
                       Solvedqueries(),
-                      Unsolvedquries()
+                      Unsolvedquries(),
                     ],
                   )),
                   SizedBox(

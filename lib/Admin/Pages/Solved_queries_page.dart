@@ -54,18 +54,7 @@ class _SolvedqueriesState extends State<Solvedqueries> {
     return Scaffold(
         backgroundColor: Colors.transparent,
         // body: Text(userData["role"]),
-        body: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromRGBO(36, 24, 24, 1),
-                    Color.fromRGBO(11, 72, 73, 1)
-                  ],
-                )),
-            child: _complaintdisplay()));
+        body: _complaintdisplay());
   }
 
   Widget _complaintdisplay() {
@@ -81,7 +70,7 @@ class _SolvedqueriesState extends State<Solvedqueries> {
               if (snapshot.hasError) {
                 return Text("Error");
               } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return Text("Loading......");
+                return Text("");
               } else if (snapshot.hasData) {
                 // var data = snapshot.data!.docs;
                 // // return Text(data[0]["message"]);
@@ -137,19 +126,31 @@ class _SolvedqueriesState extends State<Solvedqueries> {
   Widget _buildMessageItem(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-    return (data["isAccepted"])
+    return (data["isSolved"])
         ? Container(
             decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black54,
+                    spreadRadius: 0.0001,
+                    blurRadius: 8,
+                    offset: Offset(0, 10),
+                    // blurStyle: BlurStyle.inner
+                  )
+                ],
                 border: Border.all(color: Colors.green),
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(15),
                 gradient: LinearGradient(
-                    begin: AlignmentDirectional.topCenter,
-                    end: AlignmentDirectional.bottomCenter,
-                    colors: [Colors.transparent, Colors.transparent])),
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Color(0xFF0B4948), Color(0xFF062525)])),
             //padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
-            child: Complaint_display(
-              messege: data['message'],
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            child: Padding(
+              padding: const EdgeInsets.all(1.0),
+              child: Complaint_display(
+                messege: data['message'],
+              ),
             ))
         : SizedBox();
   }

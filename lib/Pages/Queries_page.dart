@@ -24,34 +24,36 @@ class _queryboxState extends State<querybox> {
     var hi = MediaQuery.of(context).size.height;
     var wi = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                Color.fromRGBO(11, 72, 73, 1),
-                Color.fromRGBO(6, 37, 37, 1)
-              ])),
-          child: Column(children: [
-            SizedBox(
-              height: hi / 9,
-            ),
-            Container(
-              height: hi / 15,
-              width: wi / 1.1,
-              color: Colors.transparent,
-              child: Center(
-                  child: Text(
-                "Query",
-                style: TextStyle(fontSize: 24, color: Colors.white),
-              )),
-            ),
-            Expanded(child: _buildmessageList()),
-          ]),
-        ),
-        floatingActionButton: FloatingActionButton(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+              Color.fromRGBO(11, 72, 73, 1),
+              Color.fromRGBO(6, 37, 37, 1)
+            ])),
+        child: Column(children: [
+          SizedBox(
+            height: hi / 9,
+          ),
+          Container(
+            height: hi / 15,
+            width: wi / 1.1,
+            color: Colors.transparent,
+            child: Center(
+                child: Text(
+              "Query",
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            )),
+          ),
+          Expanded(child: _buildmessageList()),
+        ]),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 50, right: 10),
+        child: FloatingActionButton(
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => comment()));
@@ -59,7 +61,11 @@ class _queryboxState extends State<querybox> {
           child: Icon(Icons.add),
           tooltip: 'Add',
           backgroundColor: Colors.green,
-        ));
+        ),
+      ),
+      // floatingActionButtonLocation:
+      //     FloatingActionButtonLocation.miniCenterFloat,
+    );
   }
 
   Widget _buildmessageList() {
@@ -86,22 +92,42 @@ class _queryboxState extends State<querybox> {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              spreadRadius: 0.0001,
+              blurRadius: 8,
+              offset: Offset(0, 10),
+              // blurStyle: BlurStyle.inner
+            )
+          ],
+          border: Border.all(color: Colors.green),
+          borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
-              begin: AlignmentDirectional.topCenter,
-              end: AlignmentDirectional.bottomCenter,
-              colors: [Colors.green, Colors.green])),
-      // padding: EdgeInsets.all(16),
-      margin: EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF0B4948), Color(0xFF062525)])),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-              child: Complaint_display(
-            messege: data['message'],
-          )),
-          Text(data["isAccepted"] ? "Solved" : "Pending")
+          Flexible(
+            child: Complaint_display(
+              messege: data['message'],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: Text(
+              (data["isAccepted"] == true && data["isSolved"] == false)
+                  ? "Accepted"
+                  : (data["isSolved"] == true && data["isAccepted"] == true)
+                      ? "Solved"
+                      : "Pending",
+              style: TextStyle(color: Color(0xFF68E88C)),
+            ),
+          )
         ],
       ),
     );
