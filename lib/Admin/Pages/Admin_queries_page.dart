@@ -46,7 +46,7 @@ class _TabBarPage1State extends State<Admin_query_page>
             ])),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 21.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Container(
               height: MediaQuery.of(context).size.height,
               child: Column(
@@ -68,14 +68,16 @@ class _TabBarPage1State extends State<Admin_query_page>
                         borderRadius: BorderRadius.circular(20)),
 
                     child: TabBar(
-                        unselectedLabelColor: Color.fromRGBO(92, 156, 107, 1),
-                        labelColor: Color.fromRGBO(11, 72, 73, 1),
-                        indicatorColor: Colors.white54,
+                        unselectedLabelColor: Colors.white,
+                        labelColor: Color.fromRGBO(4, 39, 40, 1),
+                        // indicatorColor: Colors.white54,
                         controller: tabController,
                         indicatorWeight: 3,
                         dividerColor: Colors.white54,
+
                         // dividerHeight: 0.001,
                         indicatorSize: TabBarIndicatorSize.tab,
+                        unselectedLabelStyle: TextStyle(color: Colors.white),
                         //indicatorPadding: EdgeInsets.symmetric(horizontal: 2,vertical:2) ,
 
                         indicator: BoxDecoration(
@@ -94,9 +96,7 @@ class _TabBarPage1State extends State<Admin_query_page>
                             child: Text(
                               'Pending',
                               style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 18, fontWeight: FontWeight.w500),
                             ),
                           ),
                           Tab(
@@ -104,7 +104,7 @@ class _TabBarPage1State extends State<Admin_query_page>
                               'Solved',
                               style: TextStyle(
                                   fontSize: 18,
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   fontWeight: FontWeight.w500),
                             ),
                           ),
@@ -113,7 +113,7 @@ class _TabBarPage1State extends State<Admin_query_page>
                               'Unsolved',
                               style: TextStyle(
                                   fontSize: 18,
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                   fontWeight: FontWeight.w500),
                             ),
                           ),

@@ -142,7 +142,7 @@ class _pendingQueryState extends State<pendingQuery> {
                                           offset: Offset(0, 10),
                                         )
                                       ],
-                                      border: Border.all(color: Colors.green),
+                                      // border: Border.all(color: Colors.green),
                                       borderRadius: BorderRadius.circular(15),
                                       gradient: LinearGradient(
                                           begin: Alignment.topLeft,

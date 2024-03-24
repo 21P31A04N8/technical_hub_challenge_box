@@ -72,6 +72,8 @@ class _commentState extends State<comment> with SingleTickerProviderStateMixin {
                       alignment: Alignment.center,
                       borderRadius: BorderRadius.circular(20),
                       dropdownColor: Color.fromRGBO(11, 72, 73, 1),
+                      itemHeight: 60,
+                      // icon: Icon(Icons.arrow_downward),
                       iconEnabledColor: Colors.white,
                       underline: Container(
                         height: 0.003,

@@ -103,7 +103,7 @@ class _queryboxState extends State<querybox> {
               // blurStyle: BlurStyle.inner
             )
           ],
-          border: Border.all(color: Colors.green),
+          // border: Border.all(color: Colors.green),
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
               begin: Alignment.topLeft,

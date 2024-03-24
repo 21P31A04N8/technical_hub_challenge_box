@@ -32,7 +32,7 @@ class _SecondScreenState extends State<SecondScreen> {
     print(_user.userData["role"]);
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey[600],
+          backgroundColor: Color.fromRGBO(10, 68, 70, 1),
           centerTitle: true,
           actions: [IconButton(onPressed: logout, icon: Icon(Icons.logout))],
           title: Text("Profile"),
@@ -45,7 +45,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       ? ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(
-                                  const Color.fromARGB(255, 75, 72, 72))),
+                                  const Color.fromARGB(255, 72, 128, 86))),
                           onPressed: () {
                             Navigator.push(
                                 context,
@@ -54,6 +54,9 @@ class _SecondScreenState extends State<SecondScreen> {
                           },
                           child: Text("Query"))
                       : ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color.fromARGB(255, 72, 128, 86))),
                           onPressed: () {
                             Navigator.push(
                                 context,

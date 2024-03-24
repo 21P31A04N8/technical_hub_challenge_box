@@ -109,6 +109,7 @@ class _SolvedqueriesState extends State<Solvedqueries> {
                 //           : null;
                 //     });
                 return ListView(
+                  padding: EdgeInsets.symmetric(vertical: 50, horizontal: 10),
                   children: snapshot.data!.docs
                       .map((doc) => _buildMessageItem(doc))
                       .toList(),
@@ -131,21 +132,19 @@ class _SolvedqueriesState extends State<Solvedqueries> {
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black54,
-                    spreadRadius: 0.0001,
-                    blurRadius: 8,
-                    offset: Offset(0, 10),
-                    // blurStyle: BlurStyle.inner
+                    color: Colors.black38,
+                    blurRadius: 10,
+                    offset: Offset(0, 6),
                   )
                 ],
-                border: Border.all(color: Colors.green),
+                // border: Border.all(color: Colors.green),
                 borderRadius: BorderRadius.circular(15),
                 gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [Color(0xFF0B4948), Color(0xFF062525)])),
             //padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            margin: EdgeInsets.only(bottom: 10),
             child: Padding(
               padding: const EdgeInsets.all(1.0),
               child: Complaint_display(
