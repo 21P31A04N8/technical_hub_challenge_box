@@ -30,6 +30,7 @@ class Complaint_display extends StatelessWidget {
         padding: const EdgeInsets.only(left: 10, top: 18, bottom: 18),
         child: Text(
           messege,
+          textAlign: TextAlign.justify,
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,

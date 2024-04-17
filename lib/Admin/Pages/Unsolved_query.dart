@@ -17,7 +17,6 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
   final chatservicres _chatService = chatservicres();
 
   final AuthgServices _authServices = AuthgServices();
-
   Map<dynamic, dynamic> userData = {};
   @override
   void initState() {
