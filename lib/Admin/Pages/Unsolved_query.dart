@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:technical_hub_challenge_box/Admin/Pages/pendingQuery.dart';
-import 'package:technical_hub_challenge_box/Auth/Auth_Services.dart';
-import 'package:technical_hub_challenge_box/Complaint/Complaint_Services.dart';
-import 'package:technical_hub_challenge_box/complaint_display.dart';
 
 class Unsolvedquries extends StatefulWidget {
   Unsolvedquries({super.key});
@@ -14,9 +10,11 @@ class Unsolvedquries extends StatefulWidget {
 }
 
 class _UnsolvedquriesState extends State<Unsolvedquries> {
-  final chatservicres _chatService = chatservicres();
+  // final _auth = FirebaseAuth.instance;
+  // final chatservicres _chatService = chatservicres();
 
-  final AuthgServices _authServices = AuthgServices();
+  // final AuthgServices _authServices = AuthgServices();
+
   Map<dynamic, dynamic> userData = {};
   @override
   void initState() {
@@ -34,19 +32,6 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // void seen(int i, String id) {
-  //   // var id;
-  //   // List docid = [currentuserID, timeStamp];
-  //   // id = docid.join("");
-  //   _firestore
-  //       .collection("Admin")
-  //       .doc("adminsDataBasedOnUser")
-  //       .collection(userData["role"])
-  //       .doc(id)
-  //       .update({"isAccepted": true});
-  //   print(
-  //       "===================================Seen tapped================================");
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -72,23 +57,22 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
                 return Text("");
               } else if (snapshot.hasData) {
                 var data = snapshot.data!.docs;
-                // return Text(data[0]["message"]);
 
                 return ListView.builder(
-                    padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 5),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: (data[index]["isAccepted"] == false)
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                            child: (data[index]["isAccepted"] == false &&
+                                    data[index]["isSolved"] == false)
                                 ? Container(
                                     decoration: BoxDecoration(
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Colors.black45,
+                                          color: Colors.black38,
                                           blurRadius: 8,
                                           offset: Offset(0, 10),
                                         )
@@ -99,10 +83,10 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
                                           begin: Alignment.topLeft,
                                           end: Alignment.bottomRight,
                                           colors: [
-                                            Color(0xFF539463),
-                                            Color(0xFF639F71),
-                                            Color(0xFF377546),
-                                            Color(0xFF74A580)
+                                            Color(0xFF539463).withOpacity(0.7),
+                                            Color(0xFF639F71).withOpacity(0.7),
+                                            Color(0xFF377546).withOpacity(0.7),
+                                            Color(0xFF74A580).withOpacity(0.7)
                                           ]),
                                     ),
                                     // padding: EdgeInsets.all(16),
@@ -176,16 +160,11 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
                                 : null,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           )
                         ],
                       );
                     });
-                // return ListView(
-                //   children: snapshot.data!.docs
-                //       .map((doc) => _buildMessageItem(doc))
-                //       .toList(),
-                // );
               } else {
                 return Text('null');
               }
@@ -199,9 +178,27 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
   // Widget _buildMessageItem(DocumentSnapshot doc) {
   //   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-  //   return Container(
-  //       child: Complaint_display(
-  //     messege: data['message'],
-  //   ));
+  //   return (data["isAccepted"])
+  //       ? Container(
+  //           decoration: BoxDecoration(
+  //               border: Border.all(color: Colors.green),
+  //               borderRadius: BorderRadius.circular(20),
+  //               gradient: LinearGradient(
+  //                   begin: AlignmentDirectional.topCenter,
+  //                   end: AlignmentDirectional.bottomCenter,
+  //                   colors: [Colors.transparent, Colors.transparent])),
+  //           //padding: EdgeInsets.all(16),
+  //           margin: EdgeInsets.symmetric(vertical: 2.5, horizontal: 25),
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Row(
+  //               children: [
+  //                 Complaint_display(
+  //                   messege: data['message'],
+  //                 ),
+  //               ],
+  //             ),
+  //           ))
+  //       : SizedBox();
   // }
 }

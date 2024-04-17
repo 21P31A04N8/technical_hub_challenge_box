@@ -93,6 +93,7 @@ class _queryboxState extends State<querybox> {
                 //     style: TextStyle(color: Colors.white, fontSize: 100),
                 //   )
                 ListView(
+              padding: EdgeInsets.symmetric(vertical: 2),
               children: snapshot.data!.docs
                   .map((doc) => _buildMessageItem(doc))
                   .toList(),

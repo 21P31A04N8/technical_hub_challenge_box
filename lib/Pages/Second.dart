@@ -1,7 +1,6 @@
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:flutter/material.dart";
 import "package:technical_hub_challenge_box/Admin/Pages/Admin_queries_page.dart";
-import "package:technical_hub_challenge_box/Admin/Pages/Dummy_complaints_display.dart";
 import "package:technical_hub_challenge_box/Auth/Auth_Services.dart";
 import "package:technical_hub_challenge_box/Auth/User_Data_Service.dart";
 import 'package:technical_hub_challenge_box/Pages/Queries_asking_page.dart';

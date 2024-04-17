@@ -14,11 +14,6 @@ class Solvedqueries extends StatefulWidget {
 }
 
 class _SolvedqueriesState extends State<Solvedqueries> {
-  // final _auth = FirebaseAuth.instance;
-  // final chatservicres _chatService = chatservicres();
-
-  // final AuthgServices _authServices = AuthgServices();
-
   Map<dynamic, dynamic> userData = {};
   @override
   void initState() {
@@ -72,42 +67,6 @@ class _SolvedqueriesState extends State<Solvedqueries> {
               } else if (snapshot.connectionState == ConnectionState.waiting) {
                 return Text("");
               } else if (snapshot.hasData) {
-                // var data = snapshot.data!.docs;
-                // // return Text(data[0]["message"]);
-
-                // return ListView.builder(
-                //     itemCount: data.length,
-                //     itemBuilder: (context, index) {
-                //       return data[index]["isAccepted"]
-                //           ? Container(
-                //               decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(20),
-                //                   gradient: LinearGradient(
-                //                       begin: AlignmentDirectional.topCenter,
-                //                       end: AlignmentDirectional.bottomCenter,
-                //                       colors: [Colors.green, Colors.green])),
-                //               //padding: EdgeInsets.all(16),
-                //               margin: EdgeInsets.symmetric(
-                //                   vertical: 2.5, horizontal: 25),
-                //               child: Row(
-                //                 mainAxisAlignment:
-                //                     MainAxisAlignment.spaceEvenly,
-                //                 children: [
-                //                   Complaint_display(
-                //                     messege: data[index]["message"],
-                //                   ),
-                //                   // IconButton(
-                //                   //     onPressed: () {
-                //                   //       setState(() {
-                //                   //         seen(index, data[index]["uuid1"]);
-                //                   //       });
-                //                   //     },
-                //                   //     icon: Icon(Icons.done_outlined))
-                //                 ],
-                //               ),
-                //             )
-                //           : null;
-                //     });
                 return ListView(
                   padding: EdgeInsets.symmetric(vertical: 50, horizontal: 10),
                   children: snapshot.data!.docs
