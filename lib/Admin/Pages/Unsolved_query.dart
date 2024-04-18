@@ -46,7 +46,7 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
         ? StreamBuilder(
             stream: _firestore
                 .collection("Admin")
-                .doc("adminsDataBasedOnUser")
+                .doc("adminsDat,aBasedOnUser")
                 .collection(userData["role"])
                 .orderBy("timestamp", descending: false)
                 .snapshots(),
@@ -58,115 +58,111 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
               } else if (snapshot.hasData) {
                 var data = snapshot.data!.docs;
 
-                return ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                            child: (data[index]["isAccepted"] == false &&
-                                    data[index]["isSolved"] == false)
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black38,
-                                          blurRadius: 8,
-                                          offset: Offset(0, 10),
-                                        )
-                                      ],
-                                      // border: Border.all(color: Colors.green),
-                                      borderRadius: BorderRadius.circular(15),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            Color(0xFF539463).withOpacity(0.7),
-                                            Color(0xFF639F71).withOpacity(0.7),
-                                            Color(0xFF377546).withOpacity(0.7),
-                                            Color(0xFF74A580).withOpacity(0.7)
-                                          ]),
+                return ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                  itemCount: data.length,
+                  itemBuilder: (context, index) {
+                    return (data[index]["isAccepted"] == false &&
+                            data[index]["isSolved"] == false)
+                        ? Container(
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black38,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 10),
+                                )
+                              ],
+                              // border: Border.all(color: Colors.green),
+                              borderRadius: BorderRadius.circular(15),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    Color(0xFF539463).withOpacity(0.7),
+                                    Color(0xFF639F71).withOpacity(0.7),
+                                    Color(0xFF377546).withOpacity(0.7),
+                                    Color(0xFF74A580).withOpacity(0.7)
+                                  ]),
+                            ),
+                            // padding: EdgeInsets.all(16),
+                            // margin: EdgeInsets.symmetric(
+                            //     vertical: 2.5, horizontal: 25),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  // height: 90,
+                                  width: 290,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      '${data[index]["message"]}',
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 16),
                                     ),
-                                    // padding: EdgeInsets.all(16),
-                                    // margin: EdgeInsets.symmetric(
-                                    //     vertical: 2.5, horizontal: 25),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          // height: 90,
-                                          width: 290,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              '${data[index]["message"]}',
-                                              textAlign: TextAlign.justify,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
-                                            ),
-                                          ),
-                                        ),
-                                        IconButton(
-                                            onPressed: () {
-                                              // Map<dynamic, dynamic> currentUserID = {};
-                                              // // Future getData()  {
-                                              // _firestore
-                                              //     .collection("Admin")
-                                              //     .doc("adminsDataBasedOnUser")
-                                              //     .collection(userData["role"])
-                                              //     .doc(data[index]["uuid1"])
-                                              //     .get()
-                                              //     .then((snapshot) {
-                                              //   //print(snapshot.data());
-                                              //   currentUserID = snapshot.data()!;
-                                              // });
-                                              // }
-                                              // var currentUserID = _firestore
-                                              //     .collection("Admin")
-                                              //     .doc("adminsDataBasedOnUser")
-                                              //     .collection(userData["role"])
-                                              //     .doc(data[index]["uuid1"])
-                                              //     .snapshots();
-                                              _firestore
-                                                  .collection("Admin")
-                                                  .doc("adminsDataBasedOnUser")
-                                                  .collection(userData["role"])
-                                                  .doc(data[index]["uuid1"])
-                                                  .update({"isAccepted": true});
-                                              print(
-                                                  "===================================Seen tapped================================");
-                                              _firestore
-                                                  .collection("Users")
-                                                  .doc(data[index]["senderID"])
-                                                  .collection("messages")
-                                                  .doc(data[index]["uuid1"])
-                                                  .update({"isAccepted": true});
-                                              print(
-                                                  "===================================Seen tapped123345566================================");
-                                              print(data[index]["senderID"]);
-                                            },
-                                            splashColor: Colors.transparent,
-                                            icon: Icon(data[index]["isAccepted"]
-                                                ? Icons.done_all
-                                                : Icons.done_outlined),
-                                            color: Color(0xFF68E88C))
-                                      ],
-                                    ),
-                                  )
-                                : null,
-                          ),
-                          SizedBox(
-                            height: 5,
+                                  ),
+                                ),
+                                IconButton(
+                                    onPressed: () {
+                                      // Map<dynamic, dynamic> currentUserID = {};
+                                      // // Future getData()  {
+                                      // _firestore
+                                      //     .collection("Admin")
+                                      //     .doc("adminsDataBasedOnUser")
+                                      //     .collection(userData["role"])
+                                      //     .doc(data[index]["uuid1"])
+                                      //     .get()
+                                      //     .then((snapshot) {
+                                      //   //print(snapshot.data());
+                                      //   currentUserID = snapshot.data()!;
+                                      // });
+                                      // }
+                                      // var currentUserID = _firestore
+                                      //     .collection("Admin")
+                                      //     .doc("adminsDataBasedOnUser")
+                                      //     .collection(userData["role"])
+                                      //     .doc(data[index]["uuid1"])
+                                      //     .snapshots();
+                                      _firestore
+                                          .collection("Admin")
+                                          .doc("adminsDataBasedOnUser")
+                                          .collection(userData["role"])
+                                          .doc(data[index]["uuid1"])
+                                          .update({"isAccepted": true});
+                                      print(
+                                          "===================================Seen tapped================================");
+                                      _firestore
+                                          .collection("Users")
+                                          .doc(data[index]["senderID"])
+                                          .collection("messages")
+                                          .doc(data[index]["uuid1"])
+                                          .update({"isAccepted": true});
+                                      print(
+                                          "===================================Seen tapped123345566================================");
+                                      print(data[index]["senderID"]);
+                                    },
+                                    splashColor: Colors.transparent,
+                                    icon: Icon(data[index]["isAccepted"]
+                                        ? Icons.done_all
+                                        : Icons.done_outlined),
+                                    color: Color(0xFF68E88C))
+                              ],
+                            ),
                           )
-                        ],
-                      );
-                    });
+                        : SizedBox();
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(
+                    height: 10,
+                  ),
+                );
               } else {
-                return Text('null');
+                return Text(
+                  'null',
+                  style: TextStyle(color: Colors.white),
+                );
               }
             })
         : Center(
