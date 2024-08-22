@@ -123,7 +123,7 @@ class _pendingQueryState extends State<pendingQuery> {
                 //           : null;
                 //     });
                 return ListView.builder(
-                    padding: EdgeInsets.symmetric(vertical: 0),
+                    //padding: EdgeInsets.symmetric(vertical: 0),
                     itemCount: data.length,
                     itemBuilder: (context, index) {
                       return Column(
@@ -225,7 +225,7 @@ class _pendingQueryState extends State<pendingQuery> {
                                 : null,
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 5,
                           )
                         ],
                       );

@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// import 'package:technical_hub_challenge_box/Auth/Auth_Services.dart';
+// import 'package:technical_hub_challenge_box/Complaint/Complaint_Services.dart';
+import 'package:technical_hub_challenge_box/complaint_display.dart';
+// import 'package:uuid/uuid.dart';
 
 class Unsolvedquries extends StatefulWidget {
   Unsolvedquries({super.key});
@@ -32,6 +36,18 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // void Function()? seen(int i) {
+  //   var id;
+  //   _firestore
+  //       .collection("Admin")
+  //       .doc("adminsDataBasedOnUser")
+  //       .collection(userData["role"])
+  //       .get()
+  //       .then((snapshots) {
+  //     id = snapshots.docs[i].id;
+  //     print(id);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +58,25 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
   }
 
   Widget _complaintdisplay() {
+    // void Function()? seen(int i, String id) {
+    //   // var id;
+    //   // List docid = [currentuserID, timeStamp];
+    //   // id = docid.join("");
+    //   _firestore
+    //       .collection("Admin")
+    //       .doc("adminsDataBasedOnUser")
+    //       .collection(userData["role"])
+    //       .doc(id)
+    //       .update({"isAccepted": true});
+    //   print(
+    //       "===================================Seen tapped================================");
+    // }
+
     return userData.isNotEmpty
         ? StreamBuilder(
             stream: _firestore
                 .collection("Admin")
-                .doc("adminsDat,aBasedOnUser")
+                .doc("adminsDataBasedOnUser")
                 .collection(userData["role"])
                 .orderBy("timestamp", descending: false)
                 .snapshots(),
@@ -57,112 +87,90 @@ class _UnsolvedquriesState extends State<Unsolvedquries> {
                 return Text("");
               } else if (snapshot.hasData) {
                 var data = snapshot.data!.docs;
-
-                return ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    return (data[index]["isAccepted"] == false &&
-                            data[index]["isSolved"] == false)
-                        ? Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 8,
-                                  offset: Offset(0, 10),
-                                )
-                              ],
-                              // border: Border.all(color: Colors.green),
-                              borderRadius: BorderRadius.circular(15),
-                              gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color(0xFF539463).withOpacity(0.7),
-                                    Color(0xFF639F71).withOpacity(0.7),
-                                    Color(0xFF377546).withOpacity(0.7),
-                                    Color(0xFF74A580).withOpacity(0.7)
-                                  ]),
-                            ),
-                            // padding: EdgeInsets.all(16),
-                            // margin: EdgeInsets.symmetric(
-                            //     vertical: 2.5, horizontal: 25),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  // height: 90,
-                                  width: 290,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      '${data[index]["message"]}',
-                                      textAlign: TextAlign.justify,
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 16),
-                                    ),
-                                  ),
+                return ListView.builder(
+                    padding: EdgeInsets.symmetric(vertical: 0),
+                    itemCount: data.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 8, right: 8, bottom: 10),
+                        child: (data[index]["isSolved"] == false &&
+                                data[index]["isAccepted"] == false)
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black38,
+                                      blurRadius: 8,
+                                      offset: Offset(0, 10),
+                                    )
+                                  ],
+                                  // border: Border.all(color: Colors.green),
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Color(0xFF539463).withOpacity(0.7),
+                                        Color(0xFF639F71).withOpacity(0.7),
+                                        Color(0xFF377546).withOpacity(0.7),
+                                        Color(0xFF74A580).withOpacity(0.7)
+                                      ]),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      // Map<dynamic, dynamic> currentUserID = {};
-                                      // // Future getData()  {
-                                      // _firestore
-                                      //     .collection("Admin")
-                                      //     .doc("adminsDataBasedOnUser")
-                                      //     .collection(userData["role"])
-                                      //     .doc(data[index]["uuid1"])
-                                      //     .get()
-                                      //     .then((snapshot) {
-                                      //   //print(snapshot.data());
-                                      //   currentUserID = snapshot.data()!;
-                                      // });
-                                      // }
-                                      // var currentUserID = _firestore
-                                      //     .collection("Admin")
-                                      //     .doc("adminsDataBasedOnUser")
-                                      //     .collection(userData["role"])
-                                      //     .doc(data[index]["uuid1"])
-                                      //     .snapshots();
-                                      _firestore
-                                          .collection("Admin")
-                                          .doc("adminsDataBasedOnUser")
-                                          .collection(userData["role"])
-                                          .doc(data[index]["uuid1"])
-                                          .update({"isAccepted": true});
-                                      print(
-                                          "===================================Seen tapped================================");
-                                      _firestore
-                                          .collection("Users")
-                                          .doc(data[index]["senderID"])
-                                          .collection("messages")
-                                          .doc(data[index]["uuid1"])
-                                          .update({"isAccepted": true});
-                                      print(
-                                          "===================================Seen tapped123345566================================");
-                                      print(data[index]["senderID"]);
-                                    },
-                                    splashColor: Colors.transparent,
-                                    icon: Icon(data[index]["isAccepted"]
-                                        ? Icons.done_all
-                                        : Icons.done_outlined),
-                                    color: Color(0xFF68E88C))
-                              ],
-                            ),
-                          )
-                        : SizedBox();
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      SizedBox(
-                    height: 10,
-                  ),
-                );
+                                // padding: EdgeInsets.all(16),
+                                // margin: EdgeInsets.symmetric(
+                                //     vertical: 2.5, horizontal: 25),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      // height: 90,
+                                      width: 290,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          '${data[index]["message"]}',
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16),
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {
+                                          _firestore
+                                              .collection("Admin")
+                                              .doc("adminsDataBasedOnUser")
+                                              .collection(userData["role"])
+                                              .doc(data[index]["uuid1"])
+                                              .update({"isAccepted": true});
+                                          print(
+                                              "===================================Seen tapped================================");
+                                          _firestore
+                                              .collection("Users")
+                                              .doc(data[index]["senderID"])
+                                              .collection("messages")
+                                              .doc(data[index]["uuid1"])
+                                              .update({"isAccepted": true});
+                                          print(
+                                              "===================================Seen tapped123345566================================");
+                                          print(data[index]["senderID"]);
+                                        },
+                                        splashColor: Colors.transparent,
+                                        icon: Icon(data[index]["isAccepted"]
+                                            ? Icons.done_all
+                                            : Icons.done_outlined),
+                                        color: Color(0xFF68E88C))
+                                  ],
+                                ),
+                              )
+                            : SizedBox(),
+                      );
+                    });
               } else {
-                return Text(
-                  'null',
-                  style: TextStyle(color: Colors.white),
-                );
+                return Text('null');
               }
             })
         : Center(
